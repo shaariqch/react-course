@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { FaUserFriends, FaFighterJet, FaTrophy, FaTimesCircle } from 'react-icons/fa';
 import PropTypes from 'prop-types';
+import Results from './Results';
+
 function Instructions() {
   return (
     <div className="instructions-container">
@@ -128,7 +130,11 @@ export default class Battle extends React.Component {
   }
 
   render() {
-    const { playerOne, playerTwo } = this.state;
+    const { playerOne, playerTwo, battle } = this.state;
+
+    if (battle === true) {
+      return <Results playerOne={playerOne} playerTwo={playerTwo}/>
+    }
     return (
       <React.Fragment>
         <Instructions />
@@ -142,7 +148,11 @@ export default class Battle extends React.Component {
                 onSubmit={player => this.handleSubmit('playerOne', player)}
               />
             ) : (
-              <PlayerPreview username={playerOne} label="Player One" onReset={() => this.handleReset('playerOne')} />
+              <PlayerPreview
+                username={playerOne}
+                label="Player One"
+                onReset={() => this.handleReset('playerOne')}
+              />
             )}
 
             {playerTwo === null ? (
@@ -151,9 +161,21 @@ export default class Battle extends React.Component {
                 onSubmit={player => this.handleSubmit('playerTwo', player)}
               />
             ) : (
-              <PlayerPreview username={playerTwo} label="Player Two" onReset={() => this.handleReset('playerTwo')} />
+              <PlayerPreview
+                username={playerTwo}
+                label="Player Two"
+                onReset={() => this.handleReset('playerTwo')}
+              />
             )}
           </div>
+          {playerOne && playerTwo && (
+            <button
+              className="btn dark-btn btn-space"
+              onClick={() => this.setState({ battle: true })}
+            >
+              Battle
+            </button>
+          )}
         </div>
       </React.Fragment>
     );
