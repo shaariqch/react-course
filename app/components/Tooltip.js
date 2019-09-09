@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Hover from './Hover';
+
 const styles = {
   container: {
     position: 'relative',
@@ -23,7 +24,7 @@ const styles = {
   },
 };
 
-function Tooltip({ text, children }) {
+export default function Tooltip({ text, children }) {
   return (
     <Hover>
       {hovering => (
@@ -39,5 +40,3 @@ function Tooltip({ text, children }) {
 Tooltip.propTypes = {
   text: PropTypes.string.isRequired,
 };
-
-export default Tooltip;

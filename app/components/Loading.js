@@ -13,14 +13,7 @@ const styles = {
 };
 
 export default class Loading extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      content: props.text,
-    };
-  }
-
+  state = { content: this.props.text };
   componentDidMount() {
     const { speed, text } = this.props;
 
@@ -30,17 +23,15 @@ export default class Loading extends React.Component {
         : this.setState(({ content }) => ({ content: content + '.' }));
     }, speed);
   }
-
   componentWillUnmount() {
     window.clearInterval(this.interval);
   }
-
   render() {
     return <p style={styles.content}>{this.state.content}</p>;
   }
 }
 
-Loading.PropTypes = {
+Loading.propTypes = {
   text: PropTypes.string.isRequired,
   speed: PropTypes.number.isRequired,
 };
