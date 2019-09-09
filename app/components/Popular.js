@@ -5,6 +5,7 @@ import { FaUser, FaStar, FaCodeBranch, FaExclamationTriangle } from 'react-icons
 import Card from './Card';
 import Loading from './Loading';
 import Tooltip from './Tooltip';
+
 function LangaugesNav({ selected, onUpdateLanguage }) {
   const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
 
@@ -38,7 +39,7 @@ function ReposGrid({ repos }) {
         const { login, avatar_url } = owner;
 
         return (
-          <li key={html_url} className="card bg-light">
+          <li key={html_url}>
             <Card header={`#${index + 1}`} avatar={avatar_url} href={html_url} name={login}>
               <ul className="card-list">
                 <li>
@@ -125,7 +126,7 @@ export default class Popular extends React.Component {
       <React.Fragment>
         <LangaugesNav selected={selectedLanguage} onUpdateLanguage={this.updateLanguage} />
 
-        {this.isLoading() && <Loading text="Fetching repos" />}
+        {this.isLoading() && <Loading text="Fetching Repos" />}
 
         {error && <p className="center-text error">{error}</p>}
 
